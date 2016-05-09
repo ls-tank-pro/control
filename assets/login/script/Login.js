@@ -1,3 +1,5 @@
+var Api = require('api');
+
 var loginBoxAction = {
     show: cc.moveTo(0.5, cc.p(0, -165)).easing(cc.easeIn(3.0)),
     hide: cc.moveTo(0.5, cc.p(0, -700)).easing(cc.easeIn(3.0))
@@ -37,6 +39,26 @@ cc.Class({
         backTrigger: {
             default: null,
             type: cc.Node
+        },
+        registerSubmit: {
+            default: null,
+            type: cc.Button
+        },
+        registerUsername: {
+            default: null,
+            type: cc.EditBox
+        },
+        registerPassword: {
+            default: null,
+            type: cc.EditBox
+        },
+        registerNickName: {
+            default: null,
+            type: cc.EditBox
+        },
+        loading: {
+            default: null,
+            type: cc.Component
         }
     },
     
@@ -52,6 +74,21 @@ cc.Class({
         this.registerTrigger.runAction(registerTrigger.show);
         this.registerBox.runAction(registerBox.hide);
         this.backTrigger.runAction(backTrigger.hide);
+    },
+    
+    registerSubmitHandler: function() {
+        var data = {
+            username: this.registerUsername.string,
+            password: this.registerPassword.string,
+            nickname: this.registerNickName.string
+        };
+        
+        this.loading.show();
+        Api.register(data).then(data => {
+            setTimeout(() => {
+                this.loading.hide();
+            }, 1000);
+        });
     },
     
     onLoad: function() {
