@@ -5,7 +5,7 @@
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "group": {
+    "login_group": {
       "ver": "1.0.2",
       "uuid": "9d518931-4262-4a44-b609-d1594a05aaf3",
       "rawTextureUuid": "ca8b8f64-ff67-412e-b77e-bc299d2cb7a6",
