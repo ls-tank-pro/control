@@ -87,8 +87,13 @@ cc.Class({
         Api.register(data).then(data => {
             setTimeout(() => {
                 this.loading.hide();
+                this.toMain();
             }, 1000);
         });
+    },
+    
+    toMain: function() {
+        cc.director.loadScene('Main');  
     },
     
     onLoad: function() {
