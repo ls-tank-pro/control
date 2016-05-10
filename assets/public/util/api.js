@@ -16,7 +16,8 @@ var ajax = function(type, url, data) {
 };
 
 var api = {
-    register: data => ajax('POST', 'http://10.10.1.38:8123/register/', data)
+    register: data => ajax('POST', 'http://10.10.1.38:8123/register/', data),
+    login: data => ajax('POST', 'http://10.10.1.38:8123/login/', data)
 };
 
 module.exports = api;

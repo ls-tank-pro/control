@@ -1,4 +1,5 @@
 var Api = require('api');
+var User = require('user');
 
 var loginBoxAction = {
     show: cc.moveTo(0.5, cc.p(0, -165)).easing(cc.easeIn(3.0)),
@@ -59,6 +60,14 @@ cc.Class({
         loading: {
             default: null,
             type: cc.Component
+        },
+        loginUsername: {
+            default: null,
+            type: cc.EditBox
+        },
+        loginPassword: {
+            default: null,
+            type: cc.EditBox
         }
     },
     
@@ -88,6 +97,27 @@ cc.Class({
             setTimeout(() => {
                 this.loading.hide();
                 this.toMain();
+            }, 1000);
+        });
+    },
+    
+    loginSubmitHandler: function() {
+        var data = {
+            username: this.loginUsername.string,
+            password: this.loginPassword.string
+        };
+        
+        this.loading.show();
+        Api.login(data).then(data => {
+            setTimeout(() => {
+                this.loading.hide();
+                User.init(data.data);
+                this.toMain();
+            }, 1000);
+        }, data => {
+            setTimeout(() => {
+                this.loading.hide();
+                alert(data.data); // todo
             }, 1000);
         });
     },
