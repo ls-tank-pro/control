@@ -19,15 +19,24 @@ class User {
         return (this.tankbody + this.tankhead + this.tankwheel) * 500;
     }
     
-    pub() {
-        this.subers.forEach(suber => suber({
+    getModifyData() {
+        return {
             diamond: this.diamond,
             kill: this.kill,
             dead: this.dead,
             tankbody: this.tankbody,
             tankhead: this.tankhead,
             tankwheel: this.tankwheel
-        }));
+        }
+    }
+    
+    pub() {
+        var self = this;
+        this.subers.forEach(function(suber) {
+            // suber.call(this, self.getModifyData())
+            // console.log(this);
+            suber(self.getModifyData());
+        });
     }
     
     sub(suber) {
@@ -35,7 +44,7 @@ class User {
     }
     
     setState(data) {
-        Object.assgin(this, data);
+        Object.assign(this, data);
         this.pub();
     }
 }

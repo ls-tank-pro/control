@@ -28,7 +28,15 @@ cc.Class({
             default: null,
             type: cc.Label
         },
-        head: {
+        thead: {
+            default: null,
+            type: cc.Node
+        },
+        tbody: {
+            default: null,
+            type: cc.Node
+        },
+        twheel: {
             default: null,
             type: cc.Node
         }
@@ -37,7 +45,10 @@ cc.Class({
     onLoad: function() {
         this.initBaseData();
         this.initComponent();
+        this.updateData(User.getModifyData());
         this.uiShow();
+        
+        User.sub(this.updateData.bind(this));
     },
     
     uiShow: function() {
@@ -56,12 +67,15 @@ cc.Class({
     },
     
     initComponent: function() {
-        this.headComponent = this.head.getComponent('EquipItem');
+        this.headComponent = this.thead.getComponent('EquipItem');
+        this.bodyComponent = this.tbody.getComponent('EquipItem');
+        this.wheelComponent = this.twheel.getComponent('EquipItem');
     },
     
-    
-    
     updateData: function(data) {
-        console.log(data);
+        this.headComponent.updateData(data);
+        this.bodyComponent.updateData(data);
+        this.wheelComponent.updateData(data);
+        this.diamond.string = data.diamond;
     }
 });

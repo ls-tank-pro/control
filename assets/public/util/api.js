@@ -17,7 +17,8 @@ var ajax = function(type, url, data) {
 
 var api = {
     register: data => ajax('POST', 'http://10.10.1.38:8123/register/', data),
-    login: data => ajax('POST', 'http://10.10.1.38:8123/login/', data)
+    login: data => ajax('POST', 'http://10.10.1.38:8123/login/', data),
+    update: data => ajax('PATCH', 'http://10.10.1.38:8123/user/', data)
 };
 
 module.exports = api;

@@ -68,6 +68,10 @@ cc.Class({
         loginPassword: {
             default: null,
             type: cc.EditBox
+        },
+        modal: {
+            default: null,
+            type: cc.Component
         }
     },
     
@@ -117,7 +121,7 @@ cc.Class({
         }, data => {
             setTimeout(() => {
                 this.loading.hide();
-                alert(data.data); // todo
+                this.modal.show(data.data);
             }, 1000);
         });
     },
