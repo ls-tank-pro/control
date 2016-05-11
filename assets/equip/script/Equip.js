@@ -51,11 +51,15 @@ cc.Class({
         User.sub(this.updateData.bind(this));
     },
     
+    toShop: function() {
+        cc.director.loadScene('Shop');  
+    },
+    
     uiShow: function() {
         var self = this;
         this.bottom.runAction(cc.moveTo(0.5, 0, 0).easing(cc.easeIn(3.0)));
         setTimeout(function() {
-            self.body.runAction(cc.moveTo(0.5, 115, 50).easing(cc.easeIn(3.0)));    
+            self.body.runAction(cc.moveTo(0.5, 115, 55).easing(cc.easeIn(3.0)));    
         }, 250);
     },
     

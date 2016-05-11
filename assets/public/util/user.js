@@ -33,8 +33,6 @@ class User {
     pub() {
         var self = this;
         this.subers.forEach(function(suber) {
-            // suber.call(this, self.getModifyData())
-            // console.log(this);
             suber(self.getModifyData());
         });
     }
