@@ -112,7 +112,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 182
+        "__id__": 183
       }
     ],
     "_prefab": null
@@ -6542,7 +6542,7 @@
         "__id__": 180
       },
       {
-        "__id__": 181
+        "__id__": 182
       }
     ],
     "_prefab": null
@@ -6599,7 +6599,11 @@
     "duration": 0.1,
     "pressedSprite": null,
     "hoverSprite": null,
-    "clickEvents": [],
+    "clickEvents": [
+      {
+        "__id__": 181
+      }
+    ],
     "_N$interactable": true,
     "_N$normalColor": {
       "__type__": "cc.Color",
@@ -6622,6 +6626,14 @@
     "_N$target": {
       "__id__": 178
     }
+  },
+  {
+    "__type__": "cc.ClickEvent",
+    "target": {
+      "__id__": 175
+    },
+    "component": "Equip",
+    "handler": "toMain"
   },
   {
     "__type__": "cc.Widget",
@@ -6657,7 +6669,7 @@
       "width": 1280,
       "height": 720
     },
-    "_fitWidth": false,
+    "_fitWidth": true,
     "_fitHeight": true
   }
 ]

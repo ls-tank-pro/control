@@ -131,6 +131,5 @@ cc.Class({
     },
     
     onLoad: function() {
-        
     }
 });

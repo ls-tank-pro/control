@@ -1,3 +1,5 @@
+var cloudAction = cc.fadeOut(1.0);
+
 cc.Class({
     extends: cc.Component,
 
@@ -9,10 +11,18 @@ cc.Class({
         fire: {
             default: null,
             type: cc.Node
+        },
+        cloudMask: {
+            default: null,
+            type: cc.Sprite
         }
     },
 
-    onLoad: function(){
-
+    onLoad: function() {
+        this.cloudMask.node.runAction(cloudAction);
+    },
+    
+    toMain: function() {
+        cc.director.loadScene('Main');
     }
 });

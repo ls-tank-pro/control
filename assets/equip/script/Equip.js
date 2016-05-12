@@ -51,8 +51,13 @@ cc.Class({
         User.sub(this.updateData.bind(this));
     },
     
+    
     toShop: function() {
         cc.director.loadScene('Shop');  
+    },
+    
+    toMain: function() {
+        cc.director.loadScene('Main');  
     },
     
     uiShow: function() {
@@ -77,6 +82,7 @@ cc.Class({
     },
     
     updateData: function(data) {
+        if (!this.headComponent) return;
         this.headComponent.updateData(data);
         this.bodyComponent.updateData(data);
         this.wheelComponent.updateData(data);

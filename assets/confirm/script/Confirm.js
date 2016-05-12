@@ -1,25 +1,40 @@
+var confirmAction = {
+    show: cc.moveTo(0.5, cc.p(0, 0)).easing(cc.easeIn(3.0)),
+    hide: cc.moveTo(0.5, cc.p(0, 720)).easing(cc.easeIn(3.0))
+};
+
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //    default: null,
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
+        desc: {
+            default: null,
+            type: cc.Label
+        }
     },
-
-    // use this for initialization
-    onLoad: function () {
+    
+    show: function(data) {
+        this.desc.string = data.desc;
+        this.confirmCallback = data.confirmCallback;
+        this.cancelCallback = data.cancelCallback;
+        
+        this.node.runAction(confirmAction.show);
+    },
+    
+    hide: function() {
+        this.node.runAction(confirmAction.hide);
+    },
+    
+    cancel: function() {
+        this.hide();
+    },
+    
+    confirm: function() {
+        this.confirmCallback();
+        this.hide();
+    },
+    
+    onLoad: function() {
 
     },
-
-    // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
-
-    // },
 });

@@ -32,5 +32,9 @@ cc.Class({
     
     toEquip: function() {
         cc.director.loadScene('Equip');
+    },
+    
+    toAction: function() {
+        cc.director.loadScene('Controller');
     }
 });

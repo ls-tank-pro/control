@@ -18,10 +18,10 @@
       "trimY": 2,
       "width": 320,
       "height": 60,
-      "borderTop": 5,
-      "borderBottom": 5,
-      "borderLeft": 5,
-      "borderRight": 5,
+      "borderTop": 10,
+      "borderBottom": 10,
+      "borderLeft": 10,
+      "borderRight": 10,
       "subMetas": {}
     }
   }
