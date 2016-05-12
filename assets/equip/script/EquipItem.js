@@ -74,6 +74,7 @@ cc.Class({
                     [this.type]: this.level + 1,
                     diamond: User.diamond - (+this.diamond.string)
                 });
+                this.modal.show('升级成功！');
             }, 1000);
         });
     }

@@ -6,7 +6,11 @@ cc.Class({
             default: null,
             type: cc.Node
         },
-        direction: 4
+        direction: 4,
+        controller: {
+            default: null,
+            type: cc.Component
+        }
     },
 
     onLoad: function() {
@@ -21,14 +25,6 @@ cc.Class({
             onTouchMoved: self.onTouchMoved.bind(self),
             onTouchEnded: self.onTouchEnded.bind(self)
         }, self.node);
-    },
-    
-    unsetTouchControl: function() {
-        
-    },
-    
-    setSendDirection: function() {
-        
     },
     
     _getAngle: function(pos) {
@@ -71,11 +67,41 @@ cc.Class({
             target.setPosition(cc.p(x, y));
         }
         
+        this.emitDirection(this.getDirection(tmpLength));
     },
     
     onTouchEnded: function(touch, event) {
         var target = this.follower;
         target.setPosition({x: 0, y: 0});
+        
+        this.emitDirection(4);
     },
+    
+    getDirection: function(length) {
+        var direction;
+        
+        if (length <= 10) return 4;
+        
+        if (this.angle < 0) this.angle = this.angle + 360;
+        
+        if (this.angle >= 0 && this.angle <= 45 || this.angle > 315 && this.angle <= 360) { 
+            direction = 1;
+        } else if (this.angle > 45 && this.angle <= 135) {
+            direction = 0;
+        } else if (this.angle > 135 && this.angle <= 225) {
+            direction = 3;
+        } else if (this.angle > 225 && this.angle <= 315) {
+            direction = 2;
+        }
+        
+        return direction;
+    },
+    
+    emitDirection: function(direction) {
+        if (this.direction !== direction) {
+            this.direction = direction;
+            this.controller.sendDirection(direction);
+        }
+    }
     
 });
