@@ -1,11 +1,17 @@
 var cloudAction = cc.fadeOut(1.0);
 var Socket = require('socket');
+var User = require('user');
+
+var resultAction = {
+    show: cc.moveTo(0.5, cc.p(0, 0)).easing(cc.easeIn(3.0)),
+    hide: cc.moveTo(0.5, cc.p(0, 720)).easing(cc.easeIn(3.0))
+};
 
 function throttle(fn, threshhold) {
     var last;
     var timer;
 
-    threshhold || (threshhold = 500);
+    threshhold || (threshhold = 750);
 
     return function () {
         var context = this;
@@ -36,13 +42,27 @@ cc.Class({
         cloudMask: {
             default: null,
             type: cc.Sprite
+        },
+        result: {
+            default: null,
+            type: cc.Node
         }
     },
 
     onLoad: function() {
         Socket.connect();
-        
         this.cloudMask.node.runAction(cloudAction);
+        
+        Socket.on('c-score', event => console.log(event));
+        Socket.on('c-boom', event => this.onBoom());
+    },
+    
+    onBoom: function() {
+        this.result.runAction(resultAction.show);
+    },
+    
+    onScore: function() {
+        // todo  
     },
     
     onDestroy: function() {
@@ -57,11 +77,20 @@ cc.Class({
     
     sendFire: throttle(function() {
         Socket.emit('c-fire', {
-            fire: 'fire' 
+            fire: User.tankhead 
         });
     }),
     
     toMain: function() {
         cc.director.loadScene('Main');
+    },
+    
+    toEquip: function() {
+        cc.director.loadScene('Equip');
+    },
+    
+    toFight: function() {
+        Socket.emit('c-next');
+        this.result.runAction(resultAction.hide);
     }
 });
