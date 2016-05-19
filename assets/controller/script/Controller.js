@@ -1,6 +1,7 @@
 var cloudAction = cc.fadeOut(1.0);
 var Socket = require('socket');
 var User = require('user');
+var Api = require('api');
 
 var resultAction = {
     show: cc.moveTo(0.5, cc.p(0, 0)).easing(cc.easeIn(3.0)),
@@ -11,7 +12,7 @@ function throttle(fn, threshhold) {
     var last;
     var timer;
 
-    threshhold || (threshhold = 750);
+    threshhold || (threshhold = 500);
 
     return function () {
         var context = this;
@@ -53,16 +54,25 @@ cc.Class({
         Socket.connect();
         this.cloudMask.node.runAction(cloudAction);
         
-        Socket.on('c-score', event => console.log(event));
+        Socket.on('c-score', event => this.onScore(event));
         Socket.on('c-boom', event => this.onBoom());
     },
     
     onBoom: function() {
+        Api.update({
+            dead: User.dead + 1,
+        }).then(data => {
+            User.dead = User.dead + 1;
+        });
         this.result.runAction(resultAction.show);
     },
     
-    onScore: function() {
-        // todo  
+    onScore: function(event) {
+        Api.update({
+            diamond: User.diamond + event.data.winner.diamond,
+        }).then(data => {
+            User.diamond = User.diamond + event.data.winner.diamond;
+        });
     },
     
     onDestroy: function() {
