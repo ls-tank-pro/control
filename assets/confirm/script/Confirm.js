@@ -15,8 +15,8 @@ cc.Class({
     
     show: function(data) {
         this.desc.string = data.desc;
-        this.confirmCallback = data.confirmCallback;
-        this.cancelCallback = data.cancelCallback;
+        this.confirmCallback = data.confirmCallback || () => {};
+        this.cancelCallback = data.cancelCallback || () => {};
         
         this.node.runAction(confirmAction.show);
     },
@@ -26,6 +26,7 @@ cc.Class({
     },
     
     cancel: function() {
+        this.cancelCallback();
         this.hide();
     },
     

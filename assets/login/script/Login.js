@@ -102,6 +102,11 @@ cc.Class({
                 this.loading.hide();
                 this.toMain();
             }, 1000);
+        }, data => {
+            setTimeout(() => {
+                this.loading.hide();
+                this.modal.show(data.data);
+            }, 1000);
         });
     },
     

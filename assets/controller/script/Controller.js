@@ -10,7 +10,6 @@ var resultAction = {
 
 function throttle(fn, threshhold) {
     var last;
-    var timer;
 
     threshhold || (threshhold = 500);
 
@@ -20,7 +19,7 @@ function throttle(fn, threshhold) {
         var now = +new Date();
 
         if (last && now < last + threshhold) {
-            clearTimeout(timer);
+            
         } else {
             last = now;
             fn.apply(context, args);

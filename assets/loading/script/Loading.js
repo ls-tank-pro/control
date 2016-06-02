@@ -15,16 +15,14 @@ cc.Class({
             type: cc.Label
         }
     },
-
-    onLoad: function () {
-        this.spin.runAction(spin);
-    },
     
     show: function() {
+        this.spin.runAction(spin);
         this.node.setContentSize(1280, 720);
     },
     
     hide: function() {
+        this.spin.stopAllActions();
         this.node.setContentSize(0, 0)
     }
 });
